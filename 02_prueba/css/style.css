@@ -1,0 +1,42 @@
+/* cofiguraciones generales */
+:root {}
+
+html{
+    font-size: 62.5%;
+}
+
+*{
+    padding:0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+
+#app{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    width: 100%;
+    height: 100vh;
+    background: rgb(200, 199, 199);
+}
+#elements_menu{
+    padding: 2rem;
+    width: 20%;
+    height: 100%;
+    background: white;
+}
+#zonadragable{
+    padding: 2rem;
+    width: 100%;
+    height: 100vh;
+    background: rgb(108, 116, 116);
+}
+#panel{
+    padding: 2rem;
+    width: 20%;
+    height: 100%;
+    background: white;
+}
