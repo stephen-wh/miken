@@ -11,5 +11,4 @@ Titulo.return_menu()
 // Creamos una nueva instancia de Contenedor
 const contenedor = new Contenedor();
 contenedor.return_menu();
-contenedor.return_panel();
 contenedor.return_zona_dragable();

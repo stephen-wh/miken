@@ -29,7 +29,7 @@ export class ElementosContext {
     // retorna codigo html para la getsion de estructura html de un menu
     static return_menu(codigoHTML){
         return( ElementosContext.menu.innerHTML += `
-        <div draggable = true id="${this.id}">
+        <div draggable=true class="Contenedor" id="${this.id}">
             <h1>${codigoHTML}</h1>
         </div>
         ` )

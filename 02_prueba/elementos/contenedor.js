@@ -7,30 +7,19 @@ export class Contenedor extends ElementosContext {
     this.direccion = 0; // 0: horizontal, 1: vertical
     this.color_fondo = "#000";
     this.grap = 1;
-    this.class_draggable = "Contenedor";
   }
 
   // Método para agregar el contenedor al menú
   return_menu() {
-    const html = `
-      <div draggable="true" class="${this.class_draggable}" id="${this.id}">
-        <h2>Contenedor</h2>
-      </div>
-    `;
+    const html = `Contenedor`;
     // Se agrega el HTML al menú
-    ElementosContext.menu.innerHTML += html;
+    ElementosContext.return_menu(html);
     // Configuramos el drag & drop sobre este contenedor (por ID)
     this.reconocer_draggable();
   }
 
   // Método para retornar una estructura de panel
   return_panel() {
-    const html = `
-      <div id="${this.id}_panel" style="border:1px solid #ccc; padding:10px; margin:5px;">
-        Panel del Contenedor
-      </div>
-    `;
-    ElementosContext.panel.innerHTML += html;
   }
 
   // Método para retornar la zona dragable propia del contenedor
