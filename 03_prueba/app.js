@@ -1,0 +1,26 @@
+// app.js
+import { Context } from "./Context.js";
+import'./elementos/contenedor.js'; // Auto-registra las clases
+
+document.addEventListener('DOMContentLoaded', () => {
+    const app = document.getElementById('app');
+    
+    app.innerHTML = `
+        <div class="menu-panel">
+            <h2>Elementos disponibles</h2>
+            <div class="elements-menu"></div>
+        </div>
+        <div class="workspace">
+            <div class="drop-zone"></div>
+        </div>
+        <div class="properties-panel">
+            <h2>Propiedades</h2>
+        </div>
+    `;
+
+    Context.init({
+        menu: document.querySelector('.elements-menu'),
+        panel: document.querySelector('.properties-panel'),
+        dropZone: document.querySelector('.drop-zone')
+    });
+});
