@@ -33,6 +33,13 @@ body {
   margin: 0 auto;
 }
 
+.elemento {
+  background: white;
+  border: 2px dashed var(--color-border);
+  padding: 1.5rem;
+  transition: background-color 0.2s ease;
+}
+
 .drop-zone {
   background: white;
   border: 2px dashed var(--color-border);
@@ -66,7 +73,7 @@ body {
 
 .workspace{
   background: rgb(255, 253, 253);
-  min-height: 90vh;
+  max-height: 90vh;
   overflow: scroll;
 }
 

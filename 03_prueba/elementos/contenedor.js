@@ -17,11 +17,9 @@ export class Contenedor extends Elementos {
         Object.assign(this.estrcturaHTML.style, {
             background: "gray",
             width: "100%",
-            height: "10rem",
-            //min-height: "10rem",
-            margin: "1rem",
-            position: "relative",  // Importante para el z-index
-            zIndex: "1"           // Valor base
+            //height: "10rem",
+            minHeight: "10rem",
+            padding: "1rem",
         });
     }
 
