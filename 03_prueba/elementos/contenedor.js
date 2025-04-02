@@ -1,60 +1,75 @@
 import { Context, Elementos } from "../Context.js";
 
 export class Contenedor extends Elementos {
-  constructor() {
-    super(); // Configuración del contenedor
-    this.direccion = 0; // 0: horizontal, 1: vertical
-    this.color_fondo = "orange";
-    this.grap = 1;
-    this.width = "100%";
-    this.height = "100%";
-    this.margin = "1rem"
-    
-    this.estrcturaHTML = document.createElement('div');
-    this.estrcturaHTML.id = this.id;
-    this.estrcturaHTML.width = this.width;
-    this.estrcturaHTML.height = this.height;
-    this.estrcturaHTML.style.background = this.color_fondo;
-    this.estrcturaHTML.innerHTML = '| contenedor |';
+    constructor() {
+        super();
+        this.configurarEstilos();
+        this.configurarEventos();
+    }
 
-    this.estrcturaHTML.addEventListener('dragover', (e) => {
-        // prevenimos accion por defecto
-      e.preventDefault();
-      // Indicamos que la operación es de copia
-      e.dataTransfer.dropEffect = 'copy'; 
-      // indicamos zona acesible cambiando de color
-      this.estrcturaHTML.style.backgroundColor = '#d0ffd0'; 
-    });
-    //Elemento arrastrado sale del área de destino
-    this.estrcturaHTML.addEventListener('dragleave', () => {
-      //Restauramos el color de fondo cuando el 
-      this.estrcturaHTML.style.backgroundColor = '#f0f0f0'; 
-    });
-    // Manejamos el evento al "soltar" el elemento en el área de destino
-    this.estrcturaHTML.addEventListener('drop', (e) => {
-      // Evita el comportamiento por defecto del navegador
-      e.preventDefault(); 
-      // Obtenemos el ID del elemento arrastrado (que basicamente es el className)
-      const id_arrastrado = e.dataTransfer.getData('text/plain'); 
-      // Buscamos la clase dntro de context
-      const claseElemento = Context.buscarClaseById(id_arrastrado)
-      // generemos un nuevo elemento con la clase
-      const nueva_clase = claseElemento.new()
-      // Agregamos la estructura html ala zona destino
-      this.estrcturaHTML.appendChild(nueva_clase.estrcturaHTML);
-      this.estrcturaHTML.style.backgroundColor = '#f0f0f0'; // Restauramos el color de fondo
-    });
-  }
+    configurarEstilos() {
+        this.estrcturaHTML = document.createElement('div');
+        this.estrcturaHTML.className = "drop-zone contenedor";
+        this.estrcturaHTML.id = this.id;
+        this.estrcturaHTML.innerHTML = '| Contenedor |';
+        
+        // Configuración de estilos en línea
+        Object.assign(this.estrcturaHTML.style, {
+            background: "gray",
+            width: "100%",
+            height: "10rem",
+            //min-height: "10rem",
+            margin: "1rem",
+            position: "relative",  // Importante para el z-index
+            zIndex: "1"           // Valor base
+        });
+    }
 
-  runApp(){
-    Context.dropZone.appendChild(this.estrcturaHTML)
-  }
+    configurarEventos() {
+        const handleDragOver = (e) => {
+            // Solo activar si el objetivo es el contenedor mismo
+            if (e.target === this.estrcturaHTML) {
+                e.preventDefault();
+                e.stopPropagation();
+                this.estrcturaHTML.classList.add('drop-zone--active');
+            }
+        };
 
-  static new(){
-    const nuevo_contenedor = new Contenedor();
-    return(nuevo_contenedor)
-  }
+        const handleDragLeave = (e) => {
+            // Solo desactivar si sale del contenedor principal
+            if (e.target === this.estrcturaHTML) {
+                this.estrcturaHTML.classList.remove('drop-zone--active');
+                this.estrcturaHTML.style.zIndex = "1";  // Restaurar z-index
+            }
+        };
+
+        const handleDrop = (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            const idArrastrado = e.dataTransfer.getData('text/plain');
+            const ClaseElemento = Context.buscarClaseById(idArrastrado);
+            
+            if (ClaseElemento) {
+                const nuevoElemento = new ClaseElemento();
+                this.estrcturaHTML.appendChild(nuevoElemento.estrcturaHTML);
+            }
+            
+            this.estrcturaHTML.classList.remove('drop-zone--active');
+            this.estrcturaHTML.style.zIndex = "1";
+        };
+
+        // Asignar eventos
+        this.estrcturaHTML.addEventListener('dragover', handleDragOver);
+        this.estrcturaHTML.addEventListener('dragleave', handleDragLeave);
+        this.estrcturaHTML.addEventListener('drop', handleDrop);
+    }
+
+    runApp() {
+        Context.dropZone.appendChild(this.estrcturaHTML);
+    }
+
+    static new() {
+        return new Contenedor();
+    }
 }
-
-console.log("hola mundo")
-// Registra la clase en el contexto
