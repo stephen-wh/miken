@@ -1,12 +1,25 @@
 export class Context {
     static clasesRegistradas = new Map();
 
+    static registros = []
+
+    /** @type {HTMLElement} */
     static menu = null;
+     /** @type {HTMLElement} */
     static panel = null;
-    static zona_draggable = null;
+     /** @type {HTMLElement} */
+    static dropZone = null;
+
+    static document = null
 
     static elemntosRegistrados = []; // Lista de instancias de elementos
     static max_id = 0; // ID autoincremental
+
+    static init({menu, panel, dropZone}){
+        Context.menu =  menu;
+        Context.panel= panel;
+        Context.dropZone= dropZone;
+    };
 
     static registrarClase(ElementClass) {
         //se agraga a egoistros y si sau nombre de la clase en el manu 
@@ -16,9 +29,9 @@ export class Context {
             <h1>${ElementClass.name}</h1>
         </div>`
         //se busca el elemnto creado y se declara logica de draggin
-        elemento = document.getElementById(ElementClass.name)
+        let elemento = document.getElementById(ElementClass.name)
         elemento.addEventListener('dragstart', e => {
-            e.dataTransfer.setData('text/class', ElementClass.name);
+            e.dataTransfer.setData('text/plain', ElementClass.name);
             e.target.classList.add('dragging');
         });
         elemento.addEventListener('dragend', e => {
@@ -27,13 +40,13 @@ export class Context {
     }
 
     static buscarClaseById(nombre_clase) {
-        return Context.clasesRegistradas.has(nombre_clase);
+        return Context.clasesRegistradas.get(nombre_clase);
     }
 
-    static agregarContexto({menu, panel, zona_draggable}) {
+    static agregarContexto({menu, panel, dropZone}) {
         Context.menu = menu;
         Context.panel = panel;
-        Context.zona_draggable = zona_draggable;
+        Context.dropZone = dropZone;
     }
 
     static agregarElemento(elemento) {
@@ -52,9 +65,13 @@ export class Elementos {
     constructor() {
         this.id = "miken_element"+(Context.max_id + 1);
         this.hijos = [];
-        this.padre = null;
         Context.agregarElemento(this)
     }
+
+    render() {
+        StartZonaDraggableById(this.id)
+    }
+
 }
 
 // Funcion para inicializar la zona dragable de un objeto

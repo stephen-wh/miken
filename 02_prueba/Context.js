@@ -1,3 +1,5 @@
+import { Contenedor } from "./elementos/contenedor"
+
 export class ElementosContext {
 
     /** @type {HTMLElement} */
@@ -24,6 +26,7 @@ export class ElementosContext {
         ElementosContext.menu = menu
         ElementosContext.panel = panel
         ElementosContext.zona_draggable = zona_draggable
+        new Contenedor()
     }
 
     // retorna codigo html para la getsion de estructura html de un menu
@@ -33,16 +36,6 @@ export class ElementosContext {
             <h1>${codigoHTML}</h1>
         </div>
         ` )
-    }
-
-    // Obtener padre
-    obtenerPadre() {
-        if (this.padre){
-            this.padre.saludar()
-            return
-        }
-        console.log("No tengo padre")
-        return
     }
 
     // Agregar hijo y asignar padres
@@ -58,6 +51,16 @@ export class ElementosContext {
                     //logica
             // }
         }
+    }
+
+    // Obtener padre
+    obtenerPadre() {
+        if (this.padre){
+            this.padre.saludar()
+            return
+        }
+        console.log("No tengo padre")
+        return
     }
 
     // (BETA) Método para transferir un elemento a un nuevo padre
