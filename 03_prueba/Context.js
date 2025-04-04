@@ -3,6 +3,7 @@ export class Context {
     static registros = [];
     static elementosRegistrados = [];
     static max_id = 0;
+    static selectedElement = null;
 
     static init({ menu, panel, dropZone }) {
         Context.menu = menu;
@@ -41,6 +42,16 @@ export class Context {
 
     static buscarElementoById(id) {
         return Context.registros.find(e => e.id === id) || null;
+    }
+
+    static actualizarPanel(elemento) {
+        Context.selectedElement = elemento;
+        Context.panel.innerHTML = ''; // Limpiar panel
+        
+        if (elemento && elemento.getPropiedades) {
+            const propiedadesUI = elemento.getPropiedades();
+            Context.panel.appendChild(propiedadesUI);
+        }
     }
 }
 
