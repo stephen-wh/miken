@@ -23,4 +23,5 @@ Context.init({
 
 Context.registrarClase(Contenedor);
 Context.registrarClase(Titulo);
+
 new Contenedor().runApp();

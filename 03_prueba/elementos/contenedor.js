@@ -8,7 +8,7 @@ export class Contenedor extends Elementos {
             width: "100%",
             minHeight: "10rem",
             padding: "1rem",
-            direccion: "horizontal",
+            direccion: "vertical",
         };
         this.configurarEstilos();
         this.configurarEventos();
@@ -20,12 +20,13 @@ export class Contenedor extends Elementos {
         this.estrcturaHTML.id = this.id;
         this.estrcturaHTML.innerHTML = '| Contenedor |';
         
-        // Configuración de estilos en línea
         Object.assign(this.estrcturaHTML.style, {
             background: this.propiedades.background,
             width: this.propiedades.width,
             minHeight: this.propiedades.minHeight,
             padding: this.propiedades.padding,
+            display: "flex",
+            flexDirection: this.propiedades.direccion === "horizontal" ? "row" : "column"
         });
     }
 

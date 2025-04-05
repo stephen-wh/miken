@@ -4,6 +4,11 @@ export class Context {
     static elementosRegistrados = [];
     static max_id = 0;
     static selectedElement = null;
+    
+    // Añadir estas propiedades estáticas
+    static menu = null;
+    static panel = null;
+    static dropZone = null;
 
     static init({ menu, panel, dropZone }) {
         Context.menu = menu;
@@ -45,6 +50,11 @@ export class Context {
     }
 
     static actualizarPanel(elemento) {
+        // Limpiar selección anterior
+        Context.registros.forEach(el => {
+            if(el.estrcturaHTML) el.estrcturaHTML.classList.remove('selected');
+        });
+        
         Context.selectedElement = elemento;
         Context.panel.innerHTML = ''; // Limpiar panel
         
@@ -60,9 +70,5 @@ export class Elementos {
         this.id = `elemento-${Context.max_id + 1}`;
         this.hijos = [];
         Context.agregarElemento(this);
-    }
-
-    render() {
-        StartZonaDraggableById(this.id);
     }
 }
