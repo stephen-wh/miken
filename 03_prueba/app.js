@@ -1,6 +1,7 @@
 import { Context } from "./Context.js";
 import { Contenedor } from './elementos/contenedor.js';
 import { Titulo } from './elementos/titulo.js';
+import { SmartComponent } from './elementos/smart.js';
 
 const app = document.getElementById('app');
 app.innerHTML = `

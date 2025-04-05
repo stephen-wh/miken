@@ -1,13 +1,26 @@
 import { Context, Elementos } from "../Context.js";
+import { PropertyManager } from "../Propiedades.js";
 
 export class Titulo extends Elementos {
     constructor() {
-        super();
-        this.propiedades = {
-            texto: "Nuevo Título",
-            tamaño: "1.5rem",
-            color: "#333"
-        };
+        super({
+            texto: {
+                label: 'Texto',
+                tipo: PropertyManager.type.text,
+                valorInicial: 'Nuevo Título'
+            },
+            tamaño: {
+                label: 'Tamaño',
+                tipo: PropertyManager.type.size,
+                valorInicial: { value: 24, unidad: 'px' }
+            },
+            color: {
+                label: 'Color',
+                tipo: PropertyManager.type.color,
+                valorInicial: '#333'
+            }
+        });
+        
         this.configurarEstilos();
         this.configurarEventos();
     }
@@ -15,84 +28,29 @@ export class Titulo extends Elementos {
     configurarEstilos() {
         this.estrcturaHTML = document.createElement('h2');
         this.estrcturaHTML.className = "elemento-titulo";
-        this.estrcturaHTML.contentEditable = true;
-        
+        this.actualizarEstilos();
+    }
+
+    actualizarEstilos() {
+        // Acceso correcto al valor compuesto
+        const tamaño = this.propiedades.tamaño 
+        ? `${this.propiedades.tamaño.value}${this.propiedades.tamaño.unidad}`
+        : '24px';
+                
         Object.assign(this.estrcturaHTML.style, {
-            fontSize: this.propiedades.tamaño,
+            fontSize: tamaño,
             color: this.propiedades.color,
-            margin: "0.5rem 0"
+            margin: '1rem 0',
+            padding: '0.5rem'
         });
         
-        this.actualizarTexto();
-    }
-
-    actualizarTexto() {
         this.estrcturaHTML.textContent = this.propiedades.texto;
-    }
-
-    getPropiedades() {
-        const container = document.createElement('div');
-        container.className = 'propiedades-contenedor';
-        
-        const titulo = document.createElement('h3');
-        titulo.textContent = 'Propiedades del Título';
-        
-        // Campo de texto
-        const textoLabel = document.createElement('label');
-        textoLabel.textContent = 'Texto:';
-        const textoInput = document.createElement('input');
-        textoInput.type = 'text';
-        textoInput.value = this.propiedades.texto;
-        
-        // Tamaño de fuente
-        const tamañoLabel = document.createElement('label');
-        tamañoLabel.textContent = 'Tamaño:';
-        const tamañoInput = document.createElement('input');
-        tamañoInput.type = 'text';
-        tamañoInput.value = this.propiedades.tamaño;
-        
-        // Color
-        const colorLabel = document.createElement('label');
-        colorLabel.textContent = 'Color:';
-        const colorInput = document.createElement('input');
-        colorInput.type = 'color';
-        colorInput.value = this.propiedades.color;
-        
-        // Eventos
-        textoInput.addEventListener('input', (e) => {
-            this.propiedades.texto = e.target.value;
-            this.actualizarTexto();
-        });
-        
-        tamañoInput.addEventListener('input', (e) => {
-            this.propiedades.tamaño = e.target.value;
-            this.estrcturaHTML.style.fontSize = e.target.value;
-        });
-        
-        colorInput.addEventListener('input', (e) => {
-            this.propiedades.color = e.target.value;
-            this.estrcturaHTML.style.color = e.target.value;
-        });
-        
-        container.append(
-            titulo,
-            textoLabel,
-            textoInput,
-            tamañoLabel,
-            tamañoInput,
-            colorLabel,
-            colorInput
-        );
-        
-        return container;
     }
 
     configurarEventos() {
         this.estrcturaHTML.addEventListener('click', (e) => {
             e.stopPropagation();
             Context.actualizarPanel(this);
-            this.estrcturaHTML.classList.add('selected');
         });
     }
-
 }

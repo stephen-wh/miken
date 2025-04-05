@@ -1,3 +1,5 @@
+import {PropertyManager} from "./Propiedades.js"
+
 export class Context {
     static clasesRegistradas = new Map();
     static registros = [];
@@ -66,9 +68,35 @@ export class Context {
 }
 
 export class Elementos {
-    constructor() {
+    constructor(schema = {}) {
         this.id = `elemento-${Context.max_id + 1}`;
         this.hijos = [];
+        this.propiedades = {};
+        this.schema = schema;
+        this.inicializarPropiedades();
         Context.agregarElemento(this);
+    }
+
+    inicializarPropiedades() {
+        Object.entries(this.schema).forEach(([key, config]) => {
+            this.propiedades[key] = config.valorInicial;
+        });
+    }
+
+    getPropiedades() {
+        return PropertyManager.generarControles(
+            this.schema,
+            this.propiedades,
+            (key, valor) => this.actualizarPropiedad(key, valor)
+        );
+    }
+
+    actualizarPropiedad(key, valor) {
+        this.propiedades[key] = valor;
+        
+        // Método hook para actualizar el DOM
+        if(this.actualizarEstilos) {
+            this.actualizarEstilos();
+        }
     }
 }
