@@ -1,7 +1,7 @@
 import { Context } from "./Context.js";
 import { Contenedor } from './elementos/contenedor.js';
 import { Titulo } from './elementos/titulo.js';
-import { SmartComponent } from './elementos/smart.js';
+import { Imagen } from './elementos/imagen.js';
 
 const app = document.getElementById('app');
 app.innerHTML = `
@@ -24,5 +24,6 @@ Context.init({
 
 Context.registrarClase(Contenedor);
 Context.registrarClase(Titulo);
+Context.registrarClase(Imagen);
 
 new Contenedor().runApp();

@@ -65,6 +65,12 @@ export class Context {
             Context.panel.appendChild(propiedadesUI);
         }
     }
+
+    static mostrarLista(){
+        console.log("Clases registradas:", Array.from(Context.clasesRegistradas.keys()));
+        console.log("Registros:", Context.registros);
+    }
+    
 }
 
 export class Elementos {
@@ -78,6 +84,7 @@ export class Elementos {
     }
 
     inicializarPropiedades() {
+        Context.mostrarLista()
         Object.entries(this.schema).forEach(([key, config]) => {
             this.propiedades[key] = config.valorInicial;
         });
@@ -93,7 +100,6 @@ export class Elementos {
 
     actualizarPropiedad(key, valor) {
         this.propiedades[key] = valor;
-        
         // Método hook para actualizar el DOM
         if(this.actualizarEstilos) {
             this.actualizarEstilos();

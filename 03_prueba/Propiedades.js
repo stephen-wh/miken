@@ -1,5 +1,6 @@
 export class PropertyManager {
     static type = Object.freeze({
+        media : 5,
         size: 4,
         color: 3,
         select: 2,
@@ -24,7 +25,7 @@ export class PropertyManager {
                     input = document.createElement('input');
                     input.type = 'color';
                     input.value = propiedades[key] || '#000000';
-                    break;
+                break;
                     
                 case PropertyManager.type.select:
                     input = document.createElement('select');
@@ -35,7 +36,7 @@ export class PropertyManager {
                         input.appendChild(option);
                     });
                     input.value = propiedades[key] || config.opciones[0]?.valor;
-                    break;
+                break;
                     
                 case PropertyManager.type.size:
                     const sizeContainer = document.createElement('div');
@@ -68,13 +69,38 @@ export class PropertyManager {
                     
                     sizeContainer.append(numInput, unitSelect);
                     input = sizeContainer;
-                    break;
+                break;
+                
+                // En Propiedades.js
+                case PropertyManager.type.media:
+                    const container = document.createElement('div');
+                    container.className = 'media-control';
+                    
+                    const fileInput = document.createElement('input');
+                    fileInput.type = 'file';
+                    fileInput.accept = 'image/*';
+                    
+                    fileInput.addEventListener('change', (e) => {
+                        const file = e.target.files[0];
+                        if (file) {
+                            const reader = new FileReader();
+                            reader.onload = (event) => {
+                                propiedades[key] = event.target.result; // Guardamos el DataURL
+                                onUpdate(key, event.target.result);
+                            };
+                            reader.readAsDataURL(file);
+                        }
+                    });
+                    
+                    container.appendChild(fileInput);
+                    input = container;
+                break;
                     
                 case PropertyManager.type.number:
                     input = document.createElement('input');
                     input.type = 'number';
                     input.value = propiedades[key] || 0;
-                    break;
+                break;
                     
                 default: // text
                     input = document.createElement('input');

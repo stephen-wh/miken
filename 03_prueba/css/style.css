@@ -91,3 +91,26 @@ body {
   gap: 1rem;
   position: relative;
 }
+
+/* En style.css */
+.media-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.media-container img {
+  border: 2px dashed var(--color-border);
+  border-radius: 0.5rem;
+  transition: opacity 0.2s;
+}
+
+.elemento-imagen {
+  padding: 1rem;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.elemento-imagen:hover {
+  transform: scale(1.02);
+}
