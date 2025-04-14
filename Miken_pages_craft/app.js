@@ -1,4 +1,4 @@
-import { Context } from "./Context.js";
+import { Context } from "./configuraciones/Context.js";
 import { Contenedor } from './elementos/contenedor.js';
 import { Titulo } from './elementos/titulo.js';
 import { Imagen } from './elementos/imagen.js';

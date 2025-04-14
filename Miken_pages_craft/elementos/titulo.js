@@ -1,5 +1,5 @@
-import { Context, Elementos } from "../Context.js";
-import { PropertyManager } from "../Propiedades.js";
+import { Context, Elementos } from "../configuraciones/Context.js";
+import { PropertyManager } from "../configuraciones/Propiedades.js";
 
 export class Titulo extends Elementos {
     constructor() {

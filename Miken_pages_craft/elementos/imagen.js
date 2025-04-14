@@ -1,6 +1,6 @@
 // elementos/imagen.js
-import { Context, Elementos } from "../Context.js";
-import { PropertyManager } from "../Propiedades.js";
+import { Context, Elementos } from "../configuraciones/Context.js";
+import { PropertyManager } from "../configuraciones/Propiedades.js";
 
 export class Imagen extends Elementos {
     constructor() {
@@ -33,7 +33,6 @@ export class Imagen extends Elementos {
                 valorInicial: 'cover'
             },
         });
-        
         this.configurarEstilos();
         this.configurarEventos();
     }
@@ -46,7 +45,7 @@ export class Imagen extends Elementos {
         this.imgElement = document.createElement('img');
         this.imgElement.style.maxWidth = '100%';
         this.estrcturaHTML.appendChild(this.imgElement);
-        
+        //super.aplicar_debbugin();
         this.actualizarEstilos();
     }
 

@@ -105,4 +105,33 @@ export class Elementos {
             this.actualizarEstilos();
         }
     }
+
+    aplicar_debbugin(){
+        this.estrcturaHTML.style.position = "relative"
+        this.titulo = document.createElement('h3');
+        this.titulo.innerText = this.constructor.name
+        Object.assign(this.titulo.style, {
+            position: "absolute",
+            top: "0",
+            right: "0",
+            color: "red",
+            display: "none"
+        });
+        this.estrcturaHTML.appendChild(this.titulo);
+        this.interaccion_debbug()
+    }
+
+    interaccion_debbug(){
+        //tecnicamente si esta en produccion esto de debe quitar
+        const MauseEntry = (e) => {
+            e.target.style.border = "2px solid red"
+            this.titulo.style.display = "block"
+        };
+        const MauseExit = (e) => {
+            e.target.style.border = "0px solid red"
+            this.titulo.style.display = "none"
+        };
+        this.estrcturaHTML.addEventListener('mouseenter', MauseEntry);
+        this.estrcturaHTML.addEventListener('mouseleave', MauseExit);        
+    }
 }
