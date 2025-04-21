@@ -60,8 +60,8 @@ export class Context {
         Context.selectedElement = elemento;
         Context.panel.innerHTML = ''; // Limpiar panel
         
-        if (elemento && elemento.getPropiedades) {
-            const propiedadesUI = elemento.getPropiedades();
+        if (elemento && elemento.Propiedades_genararContraoles) {
+            const propiedadesUI = elemento.Propiedades_genararContraoles();
             Context.panel.appendChild(propiedadesUI);
         }
     }
@@ -70,40 +70,15 @@ export class Context {
         console.log("Clases registradas:", Array.from(Context.clasesRegistradas.keys()));
         console.log("Registros:", Context.registros);
     }
-    
 }
 
-export class Elementos {
-    constructor(schema = {}) {
+export class Elementos extends PropertyManager{
+    constructor() {
+        super();
         this.id = `elemento-${Context.max_id + 1}`;
         this.hijos = [];
-        this.propiedades = {};
-        this.schema = schema;
-        this.inicializarPropiedades();
+        this.propiedades;
         Context.agregarElemento(this);
-    }
-
-    inicializarPropiedades() {
-        Context.mostrarLista()
-        Object.entries(this.schema).forEach(([key, config]) => {
-            this.propiedades[key] = config.valorInicial;
-        });
-    }
-
-    getPropiedades() {
-        return PropertyManager.generarControles(
-            this.schema,
-            this.propiedades,
-            (key, valor) => this.actualizarPropiedad(key, valor)
-        );
-    }
-
-    actualizarPropiedad(key, valor) {
-        this.propiedades[key] = valor;
-        // Método hook para actualizar el DOM
-        if(this.actualizarEstilos) {
-            this.actualizarEstilos();
-        }
     }
 
     aplicar_debbugin(){

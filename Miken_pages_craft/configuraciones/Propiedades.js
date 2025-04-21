@@ -1,4 +1,10 @@
-export class PropertyManager {
+import { EventosManager } from "./eventos.js"
+
+export class PropertyManager extends EventosManager {
+    constructor(){
+        super()
+    }
+
     static type = Object.freeze({
         media : 5,
         size: 4,
@@ -8,11 +14,11 @@ export class PropertyManager {
         number: 0
     });
     
-    static generarControles(schema, propiedades, onUpdate) {
+    Propiedades_genararContraoles(){
         const container = document.createElement('div');
         container.className = 'propiedades-contenedor';
-        
-        Object.entries(schema).forEach(([key, config]) => {
+        const onUpdate = () => { if(this.actualizarEstilos) this.actualizarEstilos(); }
+        Object.entries(this.propiedades).forEach(([key, config]) => {
             const grupo = document.createElement('div');
             grupo.className = 'propiedad-grupo';
             
@@ -24,7 +30,7 @@ export class PropertyManager {
                 case PropertyManager.type.color:
                     input = document.createElement('input');
                     input.type = 'color';
-                    input.value = propiedades[key] || '#000000';
+                    input.value = this.propiedades[key].valorInicial || '#000000';
                 break;
                     
                 case PropertyManager.type.select:
@@ -35,7 +41,7 @@ export class PropertyManager {
                         option.textContent = opcion.texto;
                         input.appendChild(option);
                     });
-                    input.value = propiedades[key] || config.opciones[0]?.valor;
+                    input.value = this.propiedades[key].valorInicial || config.opciones[0]?.valor;
                 break;
                     
                 case PropertyManager.type.size:
@@ -44,7 +50,7 @@ export class PropertyManager {
                     
                     const numInput = document.createElement('input');
                     numInput.type = 'number';
-                    numInput.value = propiedades[key]?.value || 0;
+                    numInput.value = this.propiedades[key].valorInicial?.value || 0;
                     
                     const unitSelect = document.createElement('select');
                     ['px', '%', 'em', 'rem'].forEach(unit => {
@@ -53,20 +59,18 @@ export class PropertyManager {
                         option.textContent = unit;
                         unitSelect.appendChild(option);
                     });
-                    unitSelect.value = propiedades[key]?.unidad || 'px';
+                    unitSelect.value = this.propiedades[key].valorInicial?.unidad || 'px';
                     
                     // Manejador de eventos local
                     const handleSizeChange = () => {
-                        propiedades[key] = {
+                        this.propiedades[key].valorInicial = {
                             value: numInput.value,
                             unidad: unitSelect.value
                         };
-                        onUpdate(key, propiedades[key]);
+                        if(this.actualizarEstilos) this.actualizarEstilos();
                     };
-                    
                     numInput.addEventListener('input', handleSizeChange);
                     unitSelect.addEventListener('change', handleSizeChange);
-                    
                     sizeContainer.append(numInput, unitSelect);
                     input = sizeContainer;
                 break;
@@ -85,7 +89,7 @@ export class PropertyManager {
                         if (file) {
                             const reader = new FileReader();
                             reader.onload = (event) => {
-                                propiedades[key] = event.target.result; // Guardamos el DataURL
+                                this.propiedades[key].valorInicial = event.target.result; // Guardamos el DataURL
                                 onUpdate(key, event.target.result);
                             };
                             reader.readAsDataURL(file);
@@ -99,19 +103,19 @@ export class PropertyManager {
                 case PropertyManager.type.number:
                     input = document.createElement('input');
                     input.type = 'number';
-                    input.value = propiedades[key] || 0;
+                    input.value = this.propiedades[key].valorInicial || 0;
                 break;
                     
                 default: // text
                     input = document.createElement('input');
                     input.type = 'text';
-                    input.value = propiedades[key] || '';
+                    input.value = this.propiedades[key].valorInicial || '';
             }
             
             // Manejador genérico solo para tipos básicos
             if(config.tipo !== PropertyManager.type.size) {
                 input.addEventListener('input', (e) => {
-                    propiedades[key] = e.target.value;
+                    this.propiedades[key].valorInicial = e.target.value;
                     onUpdate(key, e.target.value);
                 });
             }

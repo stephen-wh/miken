@@ -1,10 +1,11 @@
 import { Context, Elementos } from "../configuraciones/Context.js";
 import { PropertyManager } from "../configuraciones/Propiedades.js";
 import { EventosManager } from "../configuraciones/eventos.js";
-
+// lo que estoy intentando es poder getionar propiedades valor y tipo desde otro lado
 export class Contenedor extends Elementos {
     constructor() {
-        super({
+        super()
+        this.propiedades = {
             background:{
                 label: "background",
                 tipo: PropertyManager.type.color,
@@ -57,9 +58,10 @@ export class Contenedor extends Elementos {
                 ],
                 valorInicial: 'stretch'
             }
-        });
+        }
+        this.Propiedades_genararContraoles();
         this.configurarEstilos();
-        this.configurarEventos();
+        this.Event_Adress_element();
     }
 
     configurarEstilos() {
@@ -72,73 +74,31 @@ export class Contenedor extends Elementos {
 
     actualizarEstilos() {
         // Valores compuestos
-        const width = this.propiedades.width 
-        ? `${this.propiedades.width.value}${this.propiedades.width.unidad}`
+        const width = this.propiedades.width
+        ? `${this.propiedades.width.valorInicial.value}${this.propiedades.width.valorInicial.unidad}`
         : '24px';
 
-        const minHeight = this.propiedades.minHeight 
-        ? `${this.propiedades.minHeight.value}${this.propiedades.minHeight.unidad}`
+        const minHeight = this.propiedades.minHeight
+        ? `${this.propiedades.minHeight.valorInicial.value}${this.propiedades.minHeight.valorInicial.unidad}`
         : '24px';
 
         const padding = this.propiedades.padding 
-        ? `${this.propiedades.padding.value}${this.propiedades.padding.unidad}`
+        ? `${this.propiedades.padding.valorInicial.value}${this.propiedades.padding.valorInicial.unidad}`
         : '24px';
 
         Object.assign(this.estrcturaHTML.style, {
             width: width,
             minHeight: minHeight,
             padding: padding,
-            backgroundColor: this.propiedades.background, // Sin .value
+            backgroundColor: this.propiedades.background.valorInicial,
             display: 'flex',
-            flexDirection: this.propiedades.direccion,
-            justifyContent: this.propiedades.alineacionPrincipal,
-            alignItems: this.propiedades.alineacionSecundaria,
+            flexDirection: this.propiedades.direccion.valorInicial,
+            justifyContent: this.propiedades.alineacionPrincipal.valorInicial,
+            alignItems: this.propiedades.alineacionSecundaria.valorInicial,
             gap: '1rem', // Espacio entre elementos hijos
             overflow: 'auto'
         });
 
-    }
-
-
-    configurarEventos() {
-        const handleDragOver = (e) => {
-            if (e.target === this.estrcturaHTML) {
-                e.preventDefault();
-                e.stopPropagation();
-                this.estrcturaHTML.classList.add('drop-zone--active');
-            }
-        };
-
-        const handleDragLeave = (e) => {
-            if (e.target === this.estrcturaHTML) {
-                this.estrcturaHTML.classList.remove('drop-zone--active');
-            }
-        };
-
-        const handleDrop = (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            
-            const idArrastrado = e.dataTransfer.getData('text/plain');
-            const ClaseElemento = Context.buscarClaseById(idArrastrado);
-            
-            if (ClaseElemento) {
-                const nuevoElemento = new ClaseElemento();
-                this.estrcturaHTML.appendChild(nuevoElemento.estrcturaHTML);
-            }
-            
-            this.estrcturaHTML.classList.remove('drop-zone--active');
-        };
-
-        this.estrcturaHTML.addEventListener('click', (e) => {
-            if (e.target === this.estrcturaHTML) {
-                Context.actualizarPanel(this);
-                this.estrcturaHTML.classList.add('selected');
-            }
-        });
-        this.estrcturaHTML.addEventListener('dragover', handleDragOver);
-        this.estrcturaHTML.addEventListener('dragleave', handleDragLeave);
-        this.estrcturaHTML.addEventListener('drop', handleDrop);
     }
 
     runApp() {

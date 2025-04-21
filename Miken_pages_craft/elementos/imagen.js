@@ -4,7 +4,8 @@ import { PropertyManager } from "../configuraciones/Propiedades.js";
 
 export class Imagen extends Elementos {
     constructor() {
-        super({
+        super()
+        this.propiedades ={
             imagen: {
                 label: 'Imagen',
                 tipo: PropertyManager.type.media,
@@ -32,7 +33,8 @@ export class Imagen extends Elementos {
                 ],
                 valorInicial: 'cover'
             },
-        });
+        };
+        this.Propiedades_genararContraoles();
         this.configurarEstilos();
         this.configurarEventos();
     }
@@ -52,11 +54,11 @@ export class Imagen extends Elementos {
     actualizarEstilos() {
         // Valores compuestos
         const width = this.propiedades.width 
-        ? `${this.propiedades.width.value}${this.propiedades.width.unidad}`
+        ? `${this.propiedades.width.valorInicial.value}${this.propiedades.width.valorInicial.unidad}`
         : '24px';
 
         const height = this.propiedades.height 
-        ? `${this.propiedades.height.value}${this.propiedades.height.unidad}`
+        ? `${this.propiedades.height.valorInicial.value}${this.propiedades.height.valorInicial.unidad}`
         : '24px';
         
         // Aplicar estilos al contenedor padre
@@ -71,11 +73,11 @@ export class Imagen extends Elementos {
             borderRadius: '4px',
             margin: '0 auto',
             height: height,
-            objectFit: this.propiedades.ajuste,
+            objectFit: this.propiedades.ajuste.valorInicial,
         });
         
         // Asignar fuente de imagen
-        this.imgElement.src = this.propiedades.imagen || '';
+        this.imgElement.src = this.propiedades.imagen.valorInicial || '';
     }
 
     configurarEventos() {

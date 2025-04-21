@@ -3,7 +3,8 @@ import { PropertyManager } from "../configuraciones/Propiedades.js";
 
 export class Titulo extends Elementos {
     constructor() {
-        super({
+        super()
+        this.propiedades ={
             texto: {
                 label: 'Texto',
                 tipo: PropertyManager.type.text,
@@ -19,8 +20,8 @@ export class Titulo extends Elementos {
                 tipo: PropertyManager.type.color,
                 valorInicial: '#333'
             }
-        });
-        
+        }
+        this.Propiedades_genararContraoles();
         this.configurarEstilos();
         this.configurarEventos();
     }
@@ -33,18 +34,18 @@ export class Titulo extends Elementos {
 
     actualizarEstilos() {
         // Acceso correcto al valor compuesto
-        const tamaño = this.propiedades.tamaño 
-        ? `${this.propiedades.tamaño.value}${this.propiedades.tamaño.unidad}`
+        const tamaño = this.propiedades.tamaño.valorInicial 
+        ? `${this.propiedades.tamaño.valorInicial.value}${this.propiedades.tamaño.valorInicial.unidad}`
         : '24px';
                 
         Object.assign(this.estrcturaHTML.style, {
             fontSize: tamaño,
-            color: this.propiedades.color,
+            color: this.propiedades.color.valorInicial,
             margin: '1rem 0',
             padding: '0.5rem'
         });
         
-        this.estrcturaHTML.textContent = this.propiedades.texto;
+        this.estrcturaHTML.textContent = this.propiedades.texto.valorInicial;
     }
 
     configurarEventos() {
