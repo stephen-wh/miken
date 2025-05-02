@@ -1,7 +1,9 @@
+// elementos / contenedor.js
+
 import { Context, Elementos } from "../configuraciones/Context.js";
 import { PropertyManager } from "../configuraciones/Propiedades.js";
 import { EventosManager } from "../configuraciones/eventos.js";
-// lo que estoy intentando es poder getionar propiedades valor y tipo desde otro lado
+
 export class Contenedor extends Elementos {
     constructor() {
         super()

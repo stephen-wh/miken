@@ -1,3 +1,4 @@
+// elementos / titulo.js
 import { Context, Elementos } from "../configuraciones/Context.js";
 import { PropertyManager } from "../configuraciones/Propiedades.js";
 

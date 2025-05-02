@@ -1,3 +1,4 @@
+// app.js
 import { Context } from "./configuraciones/Context.js";
 import { Contenedor } from './elementos/contenedor.js';
 import { Titulo } from './elementos/titulo.js';

@@ -1,3 +1,4 @@
+// configuraciones/Context.js
 import {PropertyManager} from "./Propiedades.js"
 
 export class Context {

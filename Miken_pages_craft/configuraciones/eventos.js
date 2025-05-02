@@ -1,3 +1,4 @@
+// configuraciones/eventos.js
 import { Context } from "./Context.js"
 
 export class EventosManager {

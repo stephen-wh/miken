@@ -1,3 +1,4 @@
+// configuraciones/Propiedades.js
 import { EventosManager } from "./eventos.js"
 
 export class PropertyManager extends EventosManager {
