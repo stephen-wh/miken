@@ -7,10 +7,11 @@ import { Imagen } from './elementos/imagen.js';
 const app = document.getElementById('app');
 app.innerHTML = `
     <div class="menu-panel">
-        <h2>Elementos disponibles</h2>
         <div class="elements-menu">
-            <div class="elements-catalogo"></div>
-            <div class="elements-estructura"></div>
+            <h2>Elementos disponibles</h2>
+                <div class="elements-catalogo"></div>
+            <h2>Arbol de elementos</h2>
+                <div class="elements-estructura"></div>
         </div>
         
     </div>

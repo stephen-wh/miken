@@ -22,6 +22,7 @@ export class Titulo extends Elementos {
                 valorInicial: '#333'
             }
         }
+        this.class_name = "Titulo";
         this.Propiedades_genararContraoles();
         this.configurarEstilos();
         this.Event_Click_Reload_Panel();

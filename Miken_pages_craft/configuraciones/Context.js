@@ -49,8 +49,14 @@ export class Context {
     }
 
     static agregarElemento(elemento) {
+        console.log(elemento)
+        console.log(elemento["class_name"])
         Context.registros.push(elemento);
         Context.max_id += 1;
+        const label = document.createElement('h3');
+        label.className = "element-item";
+        label.innerText = elemento.class_name || elemento.id;
+        Context.estructura.appendChild(label);
     }
 
     static buscarElementoById(id) {
@@ -102,6 +108,9 @@ export class Elementos extends PropertyManager{
         this.id = `elemento-${Context.max_id + 1}`;
         this.hijos = [];
         this.propiedades;
+        setTimeout(() => this.pos_construccion(), 0);
+    }
+    pos_construccion(){
         Context.agregarElemento(this);
     }
 
