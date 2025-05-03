@@ -24,7 +24,8 @@ export class Titulo extends Elementos {
         }
         this.Propiedades_genararContraoles();
         this.configurarEstilos();
-        this.configurarEventos();
+        this.Event_Click_Reload_Panel();
+        this.Event_SUPRIM();
     }
 
     configurarEstilos() {
@@ -47,12 +48,5 @@ export class Titulo extends Elementos {
         });
         
         this.estrcturaHTML.textContent = this.propiedades.texto.valorInicial;
-    }
-
-    configurarEventos() {
-        this.estrcturaHTML.addEventListener('click', (e) => {
-            e.stopPropagation();
-            Context.actualizarPanel(this);
-        });
     }
 }

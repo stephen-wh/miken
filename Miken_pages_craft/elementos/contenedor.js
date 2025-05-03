@@ -64,6 +64,8 @@ export class Contenedor extends Elementos {
         this.Propiedades_genararContraoles();
         this.configurarEstilos();
         this.Event_Adress_element();
+        this.Event_Click_Reload_Panel();
+        this.Event_SUPRIM();
     }
 
     configurarEstilos() {

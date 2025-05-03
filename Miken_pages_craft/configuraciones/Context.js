@@ -9,12 +9,17 @@ export class Context {
     static selectedElement = null;
     
     // Añadir estas propiedades estáticas
-    static menu = null;
+    static catalogo = null;
+    static estructura = null;
     static panel = null;
     static dropZone = null;
 
-    static init({ menu, panel, dropZone }) {
-        Context.menu = menu;
+    //variable para tener n paginas
+    static paginas = null;
+
+    static init({ panel, dropZone, catalogo, estructura }) {
+        Context.catalogo = catalogo;
+        Context.estructura = estructura;
         Context.panel = panel;
         Context.dropZone = dropZone;
     }
@@ -35,7 +40,7 @@ export class Context {
             e.target.classList.remove('dragging');
         });
 
-        Context.menu.appendChild(div);
+        Context.catalogo.appendChild(div);
         Context.clasesRegistradas.set(ElementClass.name, ElementClass);
     }
 
@@ -70,6 +75,24 @@ export class Context {
     static mostrarLista(){
         console.log("Clases registradas:", Array.from(Context.clasesRegistradas.keys()));
         console.log("Registros:", Context.registros);
+    }
+    
+    static eliminarElemento(elemento) {
+        console.log("entro a context con ", elemento)
+        if (elemento.id=="elemento-1"){ return }
+        // Remover de registros
+        Context.registros = Context.registros.filter(el => el.id !== elemento.id);
+        
+        // Remover del DOM
+        if(elemento.estrcturaHTML && elemento.estrcturaHTML.parentNode) {
+            elemento.estrcturaHTML.parentNode.removeChild(elemento.estrcturaHTML);
+        }
+        
+        // Limpiar selección
+        Context.selectedElement = null;
+        Context.actualizarPanel(null);
+        
+        console.log(`Elemento ${elemento.id} eliminado`);
     }
 }
 

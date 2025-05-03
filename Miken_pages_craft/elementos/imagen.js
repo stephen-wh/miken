@@ -36,17 +36,13 @@ export class Imagen extends Elementos {
         };
         this.Propiedades_genararContraoles();
         this.configurarEstilos();
-        this.configurarEventos();
+        this.Event_Click_Reload_Panel();
+        this.Event_SUPRIM();;
     }
 
     configurarEstilos() {
-        this.estrcturaHTML = document.createElement('div');
+        this.estrcturaHTML = document.createElement('img');
         this.estrcturaHTML.className = "elemento-imagen";
-        
-        // Elemento img para el preview
-        this.imgElement = document.createElement('img');
-        this.imgElement.style.maxWidth = '100%';
-        this.estrcturaHTML.appendChild(this.imgElement);
         //super.aplicar_debbugin();
         this.actualizarEstilos();
     }
@@ -63,27 +59,16 @@ export class Imagen extends Elementos {
         
         // Aplicar estilos al contenedor padre
         Object.assign(this.estrcturaHTML.style, {
-            padding: '1rem',
-            position: 'relative'
-        });
-        
-        // Aplicar estilos a la imagen
-        Object.assign(this.imgElement.style, {
-            width: width,
             borderRadius: '4px',
-            margin: '0 auto',
+            width: width,
             height: height,
+            margin :"0",
+            padding:"0",
             objectFit: this.propiedades.ajuste.valorInicial,
+        
         });
         
         // Asignar fuente de imagen
-        this.imgElement.src = this.propiedades.imagen.valorInicial || '';
-    }
-
-    configurarEventos() {
-        this.estrcturaHTML.addEventListener('click', (e) => {
-            e.stopPropagation();
-            Context.actualizarPanel(this);
-        });
+        this.estrcturaHTML.src = this.propiedades.imagen.valorInicial || '';
     }
 }

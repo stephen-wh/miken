@@ -8,7 +8,11 @@ const app = document.getElementById('app');
 app.innerHTML = `
     <div class="menu-panel">
         <h2>Elementos disponibles</h2>
-        <div class="elements-menu"></div>
+        <div class="elements-menu">
+            <div class="elements-catalogo"></div>
+            <div class="elements-estructura"></div>
+        </div>
+        
     </div>
     <div class="workspace">
     </div>
@@ -18,9 +22,10 @@ app.innerHTML = `
 `;
 
 Context.init({
-    menu: document.querySelector('.elements-menu'),
     panel: document.querySelector('.properties-panel'),
-    dropZone: document.querySelector('.workspace')
+    dropZone: document.querySelector('.workspace'),
+    catalogo: document.querySelector('.elements-catalogo'),
+    estructura: document.querySelector('.elements-estructura'),
 });
 
 Context.registrarClase(Contenedor);
