@@ -95,7 +95,7 @@ class Camara {
             nuevoTitulo.id = "titulo" + i;
             const nuevoInfo = document.createElement('h2');
             nuevoInfo.id = "info" + i;
-            const nuevaImagen = document.createElement('div');
+            const nuevaImagen = document.createElement('img');
             nuevaImagen.id = "imagen" + i;
 
             nuevaSeccion.appendChild(nuevoTitulo);
@@ -237,18 +237,19 @@ const pelicula = new Pelicula(4);
 pelicula.iniciar([
     [
         async () => { 
-            await pelicula.camara.add_time_animated(5);
+            await pelicula.camara.add_time_animated(1);
             pelicula.camara.ordening_change([2, 3, 0, 1]);
             pelicula.camara.data[0].item.style.background = "white";
             pelicula.camara.data[0].item.style.width = "100%";
             pelicula.camara.data[0].item.style.maxWidth = "100%";
             pelicula.camara.data[0].item.style.minWidth = "100%";
-            pelicula.camara.data[3].item.style.background = "green";
+            pelicula.camara.data[3].imagen_1.src = "https://r-charts.com/es/miscelanea/procesamiento-imagenes-magick_files/figure-html/color-fondo-imagen-r.png";
             await pelicula.camara.delay_animate();
         },
         async () => {
             pelicula.camara.data[3].item.style.background = "green";
-            await pelicula.camara.data[0].writing_titulo.typeText("Título Dinámico 1", 150);
+            await pelicula.camara.data[3].writing_titulo.typeText("Título Dinámico 1", 150);
+            pelicula.camara.data[3].titulo_1.style.color = "#000"
             await pelicula.camara.data[2].writing_titulo.typeText("Título Dinámico 2", 150);
         },
     ],
