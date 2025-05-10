@@ -241,8 +241,6 @@ pelicula.iniciar([
             pelicula.camara.ordening_change([2, 3, 0, 1]);
             pelicula.camara.data[0].item.style.background = "white";
             pelicula.camara.data[0].item.style.width = "100%";
-            pelicula.camara.data[0].item.style.maxWidth = "100%";
-            pelicula.camara.data[0].item.style.minWidth = "100%";
             pelicula.camara.data[3].imagen_1.src = "https://r-charts.com/es/miscelanea/procesamiento-imagenes-magick_files/figure-html/color-fondo-imagen-r.png";
             await pelicula.camara.delay_animate();
         },
