@@ -49,8 +49,6 @@ export class Context {
     }
 
     static agregarElemento(elemento) {
-        console.log(elemento)
-        console.log(elemento["class_name"])
         Context.registros.push(elemento);
         Context.max_id += 1;
         const label = document.createElement('h3');

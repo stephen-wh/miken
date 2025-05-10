@@ -1,0 +1,95 @@
+/* Reset moderno */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --color-primary: #957737;
+  --color-dark: #030303;
+  --color-light: #f5f5f5;
+  --transition-duration: 0.3s;
+}
+
+body{
+  color: var(--color-light);
+}
+
+#Camara{
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+}
+
+.contendor{
+  width: 100%;
+  min-width: 100%;
+  max-width: 100%;
+  height: 100vh;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  background: var(--color-dark);
+}
+
+.contendor .item{
+  width: 50%;
+  height: 50%;
+  min-width: 50%;
+  min-height: 50%;
+  max-width: 50%;
+  max-height: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: 1s;
+}
+
+#navbar {
+  z-index: 1000;
+  position: fixed;
+  top: calc(100% - 5rem);
+  left: calc(50% - 5rem);
+  width: 5rem;
+  height: 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+#navbar div {
+  display: flex;
+  padding: 0.5rem;
+  border-radius: 100%;
+  justify-content: center;
+}
+
+#navbar div a {
+  display: block;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 100%;
+  background: rgba(210, 199, 199, 0.171);
+  color: white;
+}
+
+#navbar div h4 {
+  position: absolute;
+  transition: 1s;
+  opacity: 0;
+  width: 100vw;
+  text-align: center;
+  right: 0;
+  top: -1rem;
+  background: red;
+}
+
+#navbar div:hover h4 {
+  transition: 1s;
+  opacity: 1;
+  position: absolute;
+}

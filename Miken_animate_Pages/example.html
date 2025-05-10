@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Grid 4x4 Animado</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background: #f0f0f0;
+    }
+
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr); /* 4 columnas iguales */
+      grid-template-rows: repeat(4, 150px); /* 4 filas de 150px de alto */
+      gap: 10px; /* Espacio entre cuadros */
+      padding: 20px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .grid-item {
+      transition: transform 1s ease; /* 🔥 Animación suave */
+      background-color: #4CAF50;
+      color: white;
+      font-size: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      box-shadow: 0px 4px 8px rgba(0,0,0,0.2);
+    }
+
+    /* Mover el item con translate() */
+    .move {
+      transform: translate(100px, 200px); /* Mover el elemento con translate */
+      background-color: #2196F3;
+    }
+  </style>
+</head>
+<body>
+
+<div class="grid-container">
+  <div id="uno" class="grid-item">1</div>
+  <div id="dos" class="grid-item">2</div>
+  <div id="tres" class="grid-item">3</div>
+  <div id="cuatro" class="grid-item">4</div>
+  <div id="cinco" class="grid-item">5</div>
+  <div id="seis" class="grid-item">6</div>
+  <div id="siete" class="grid-item">7</div>
+  <div id="ocho" class="grid-item">8</div>
+  <div id="nueve" class="grid-item">9</div>
+  <div id="diez" class="grid-item">10</div>
+  <div id="once" class="grid-item">11</div>
+  <div id="doce" class="grid-item">12</div>
+  <div id="trece" class="grid-item">13</div>
+  <div id="catorce" class="grid-item">14</div>
+  <div id="quince" class="grid-item">15</div>
+  <div id="dieciséis" class="grid-item">16</div>
+</div>
+
+<script>
+  setTimeout(() => {
+    // Seleccionamos el item con id "uno" y le añadimos la clase "move"
+    const uno = document.getElementById("uno");
+    const dos = document.getElementById("dos");
+    const tres = document.getElementById("tres");
+
+    // Animamos el reordenamiento de los items con un 'translate' suave
+    uno.classList.add("move");
+    dos.classList.add("move");
+    tres.classList.add("move");
+  }, 2000); // Esperamos 2 segundos antes de que comience la animación
+</script>
+
+</body>
+</html>

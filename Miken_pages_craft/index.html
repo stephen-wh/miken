@@ -9,6 +9,35 @@
 </head>
 <body>
     <div id="app" class="container"></div>
+    <button onclick="exportar()" style="position: absolute; top: 0; left: 0;"> exportar</button>
     <script type="module" src="app.js"></script>
+    <script>
+        function exportar() {
+            // Seleccionar solo la parte que quieres exportar
+            const workspace = document.querySelector('.workspace');
+            if (!workspace) {
+                console.error('No se encontró ningún elemento con la clase ".workspace".');
+                return;
+            }
+        
+            // Clonar la zona de trabajo
+            const clon = workspace.cloneNode(true);
+        
+            // Eliminar cualquier <script> dentro del clon (por si acaso)
+            clon.querySelectorAll('script').forEach(script => script.remove());
+        
+            // Convertir el clon a HTML
+            const htmlLimpio = '<!DOCTYPE html>\n<html>\n<head>\n<meta charset="UTF-8">\n<title>Exportado</title>\n<link rel="stylesheet" href="css/style.css">\n</head>\n<body>\n' + clon.outerHTML + '\n</body>\n</html>';
+        
+            // Mostrarlo o abrirlo
+            const ventanaPreview = window.open('', '_blank');
+            ventanaPreview.document.open();
+            ventanaPreview.document.write(htmlLimpio);
+            ventanaPreview.document.close();
+        }
+        </script>
+        
+        
+
 </body>
 </html>
